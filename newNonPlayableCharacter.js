@@ -28,6 +28,7 @@ function newNonPlayableCharacter(x, y) {
         element.src = `./assets/red-character/east.gif`
         await sleep (time)
         return stop()
+        
     }
     
 
