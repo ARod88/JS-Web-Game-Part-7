@@ -1,43 +1,70 @@
-// Create the playable character
-const pc = newPlayableCharacter(100, 110)
+// Define sleep function
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+  
+  // Define walk functions for each direction
+  async function walkNorth(time, element) {
+    direction = 'north'
+    element.src = `./assets/red-character/north.gif`
+    await sleep(time)
+    return stop()
+  }
+  
+  async function walkSouth(time, element) {
+    direction = 'south'
+    element.src = `./assets/red-character/south.gif`
+    await sleep(time)
+    return stop()
+  }
+  
+  async function walkWest(time, element) {
+    direction = 'west'
+    element.src = `./assets/red-character/west.gif`
+    await sleep(time)
+    return stop()
+  }
+  
+  async function walkEast(time, element) {
+    direction = 'east'
+    element.src = `./assets/red-character/east.gif`
+    await sleep(time)
+    return stop()
+  }
+  
+  // Create the playable character
+  const pc = newPlayableCharacter(100, 110)
+  
+  // Create a non-playable character
+  const npc = newNonPlayableCharacter(50, 300)
+  
+  // have the NPC start walking east immediately
+  async function moveNPC() {
+    await npc.walkNorth(1400)
+    await npc.walkEast(1200)
+    await npc.walkSouth(300)
+    await npc.walkEast(1500)
+    await npc.walkSouth(1500)
+    await npc.walkWest(2700)
+    await npc.walkNorth(400)
+  }
+  
+  moveNPC()
+  
+  // Create the inventory
+  const inventory = newInventory()
+  move(inventory).to(0, 0)
+  
+  // Create everything else
+  move(newImage('assets/tree.png')).to(200, 450)
+  move(newImage('assets/pillar.png')).to(350, 250)
+  move(newImage('assets/pine-tree.png')).to(450, 350)
+  move(newImage('assets/crate.png')).to(150, 350)
+  move(newImage('assets/well.png')).to(500, 575)
+  move(newItem('assets/sword.png')).to(500, 555)
+  move(newItem('assets/shield.png')).to(165, 335)
+  move(newItem('assets/staff.png')).to(600, 250)
+  
 
-// Create a non-playable character
-const npc = newNonPlayableCharacter(50, 300)
-
-// have the NPC start walking east immediately
-
-//     async function moveNPC(){
-//          npc.walkNorth(1400)
-//          npc.walkEast(1200)
-//         // await npc.walkSouth(300)
-//         // await npc.walkEast(1500)
-//         // await npc.walkSouth(1500)
-//         // await npc.walkWest(2700)
-//         // await npc.walkNorth(400)
-//     }
-    
-// moveNPC()
-
-npc.walkNorth(1400)
-    .then(() => npc.walkEast(1200))
-    .then(() => npc.walkSouth(300))
-    .then(() => npc.walkEast(1500))
-    .then(() => npc.walkSouth(1500))
-    .then(() => npc.walkWest(2700))
-    .then(() => npc.walkNorth(400))
 
 
-// Create the inventory
-const inventory = newInventory()
-move(inventory).to(0, 0)
-
-// Create everything else
-move(newImage('assets/tree.png')).to(200, 450)
-move(newImage('assets/pillar.png')).to(350, 250)
-move(newImage('assets/pine-tree.png')).to(450, 350)
-move(newImage('assets/crate.png')).to(150, 350)
-move(newImage('assets/well.png')).to(500, 575)
-move(newItem('assets/sword.png')).to(500, 555)
-move(newItem('assets/shield.png')).to(165, 335)
-move(newItem('assets/staff.png')).to(600, 250)
-               
